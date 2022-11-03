@@ -1,5 +1,6 @@
-var iota = require("iota-array")
-var isBuffer = require("is-buffer")
+import iota from "iota-array"
+//var isBuffer = require("is-buffer")
+const isBuffer = () => false;
 
 var hasTypedArrays  = ((typeof Float64Array) !== "undefined")
 
@@ -346,4 +347,4 @@ function wrappedNDArrayCtor(data, shape, stride, offset) {
   return ctor(data, shape, stride, offset)
 }
 
-module.exports = wrappedNDArrayCtor
+export default wrappedNDArrayCtor

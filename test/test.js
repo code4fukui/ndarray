@@ -1,8 +1,8 @@
-var test = require("tape")
-var perm = require("permutation-rank")
-var invPerm = require("invert-permutation")
-var dup = require("dup")
-var ndarray = require("../ndarray.js")
+import test from "tape"
+import perm from "permutation-rank"
+import invPerm from "invert-permutation"
+import dup from "dup"
+import ndarray from "../ndarray.js"
 
 test("ndarray", function(t) {
 

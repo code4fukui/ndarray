@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "iota-array": "https://code4fukui.github.io/iota-array/iota.js"
+  }
+}

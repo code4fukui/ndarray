@@ -17,7 +17,8 @@
     "tape": "^2.12.3"
   },
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "tape test/*.js",
+    "build-es": "deno bundle --importmap=import-map.json ndarray.js | terser -c -m --module -o ndarray.min.js"
   },
   "repository": {
     "type": "git",
@@ -62,5 +63,6 @@
       "iphone/6.0..latest",
       "android-browser/4.2..latest"
     ]
-  }
+  },
+  "type": "module"
 }
