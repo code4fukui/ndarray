@@ -1,17 +1,28 @@
 ndarray
 =======
 Modular multidimensional arrays for JavaScript. 
+# ndarray
+日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
 
 [![browser support](https://ci.testling.com/mikolalysenko/ndarray.png)
 ](https://ci.testling.com/mikolalysenko/ndarray)
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
 
 [![build status](https://secure.travis-ci.org/scijs/ndarray.png)](http://travis-ci.org/scijs/ndarray)
+Modular multidimensional arrays for JavaScript.
 
 [![stable](https://rawgithub.com/hughsk/stability-badges/master/dist/frozen.svg)](http://github.com/hughsk/stability-badges)
+## Features
+- Provides n-dimensional views of 1D arrays
+- Supports slicing, transposing, and resizing in constant time
+- Works with Node.js and in the browser using tools like Browserify
+- Supports a wide range of data types, including typed arrays and generic data stores
 
 ##### Browse a number of ndarray-compatible modules in the [scijs documentation](http://scijs.net/packages)
 ##### Coming from MATLAB or numpy? See: [scijs/ndarray for MATLAB users](https://github.com/scijs/scijs-ndarray-for-matlab-users)
 ##### [Big list of ndarray modules](https://github.com/scijs/ndarray/wiki/ndarray-module-list#core-module)
+## Usage
+Install the library using npm:
 
 Introduction
 ============
@@ -93,6 +104,7 @@ npm install ndarray
 ```
 
 You can also use ndarrays in a browser with any tool that follows the CommonJS/node module conventions.  The most direct way to do this is to use [browserify](https://github.com/substack/node-browserify).  If you want live-reloading for faster debugging, check out [beefy](https://github.com/chrisdickinson/beefy).
+Then, use it in your project:
 
 API
 ===
@@ -103,6 +115,8 @@ var ndarray = require("ndarray")
 ```
 
 ## Constructor
+// Create a 2x2 matrix
+var mat = ndarray(new Float64Array([1, 0, 0, 1]), [2,2])
 
 ### `ndarray(data[, shape, stride, offset])`
 The default `module.exports` method is the constructor for ndarrays.  It creates an n-dimensional array view wrapping an underlying storage type
@@ -135,31 +149,48 @@ Retrieves element `i,j,...` from the array.  In psuedocode, this is implemented 
 function get(i,j,...) {
   return this.data[this.offset + this.stride[0] * i + this.stride[1] * j + ... ]
 }
+// Access elements using .set and .get
+console.log(mat.get(0,0)) // 1
+console.log(mat.get(0,1)) // 0
+console.log(mat.get(1,0)) // 0 
+console.log(mat.get(1,1)) // 1
 ```
 
 ### `array.set(i,j,...,v)`
 Sets element `i,j,...` to `v`. Again, in psuedocode this works like this:
+## API
+The main API consists of the `ndarray` constructor and various methods for accessing and manipulating the array data.
 
 ```javascript
 function set(i,j,...,v) {
   return this.data[this.offset + this.stride[0] * i + this.stride[1] * j + ... ] = v
 }
 ```
+Create a new n-dimensional array view.
 
 ### `array.index(i,j, ...)`
 Retrieves the index of the cell in the underlying ndarray.  In JS,
+- `data`: The underlying 1D storage, either an array, typed array, or object with `get()/set()` methods.
+- `shape`: The shape of the new array (optional, defaults to `data.length`).
+- `stride`: The strides of the new array (optional, defaults to row-major order).
+- `offset`: The starting offset of the view (optional, defaults to 0).
 
 ```javascript
 function index(i,j, ...) {
   return this.offset + this.stride[0] * i + this.stride[1] * j + ...
 }
 ```
+### `array.shape`
+The shape of the array.
 
 ## Properties
 The following properties are created using Object.defineProperty and do not take up any physical memory.  They can be useful in calculations involving ndarrays
+### `array.stride`
+The strides of the array.
 
 ### `array.dtype`
 Returns a string representing the undelying data type of the ndarray.  Excluding generic data stores these types are compatible with [`typedarray-pool`](https://github.com/mikolalysenko/typedarray-pool).  This is mapped according to the following rules:
+Retrieve the value at the given indices.
 
 Data type | String
 --------: | :-----
@@ -177,14 +208,22 @@ Data type | String
 `Uint8ArrayClamped` | "uint8_clamped"
 `Buffer` | "buffer"
 Other | "generic"
+### `array.set(i, j, ..., value)`
+Set the value at the given indices.
 
 Generic arrays access elements of the underlying 1D store using get()/set() instead of array accessors.
+### `array.lo(i, j, ...)`
+Create a new view with the origin shifted.
 
 ### `array.size`
 Returns the size of the array in logical elements.
+### `array.hi(i, j, ...)`
+Create a new view with the origin truncated.
 
 ### `array.order`
 Returns the order of the stride of the array, sorted in ascending length. The first element is the first index of the shortest stride and the last is the index the longest stride.
+### `array.step(i, j, ...)`
+Create a new view with the strides rescaled.
 
 ### `array.dimension`
 Returns the dimension of the array.
@@ -254,3 +293,6 @@ For more discussion about ndarrays, here are some talks, tutorials and articles 
 License
 =======
 (c) 2013-2016 Mikola Lysenko. MIT License
+
+## License
+This project is licensed under the [MIT License](LICENSE).
