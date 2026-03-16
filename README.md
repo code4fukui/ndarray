@@ -1,5 +1,3 @@
-ndarray
-=======
 Modular multidimensional arrays for JavaScript. 
 
 [![browser support](https://ci.testling.com/mikolalysenko/ndarray.png)
@@ -243,6 +241,7 @@ var blue  = image.pick(null, null, 2)
 As the above example illustrates, passing a negative or non-numeric value to a coordinate in pick skips that index.
 
 # More information
+日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
 
 For more discussion about ndarrays, here are some talks, tutorials and articles about them:
 
@@ -254,3 +253,6 @@ For more discussion about ndarrays, here are some talks, tutorials and articles 
 License
 =======
 (c) 2013-2016 Mikola Lysenko. MIT License
+
+## License
+This project is licensed under the [MIT License](LICENSE).
