@@ -1,5 +1,7 @@
 ndarray
 =======
+
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
 Modular multidimensional arrays for JavaScript. 
 
 [![browser support](https://ci.testling.com/mikolalysenko/ndarray.png)
